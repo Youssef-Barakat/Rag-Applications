@@ -1,9 +1,9 @@
 from ..LLMInterface import LLMInterface
-from openai import OpenAI 
-import logging
 from ..LLMEnums import OpenAIEnums
+from openai import OpenAI
+import logging
 
-class OpenAIProvieder(LLMInterface):
+class OpenAIProvider(LLMInterface):
     def __init__(self, api_key: str, api_url: str = None, 
                  default_input_max_characters: int = 1000,
                  default_output_max_tokens: int = 1000,
@@ -22,10 +22,10 @@ class OpenAIProvieder(LLMInterface):
         
         self.client = OpenAI(
             api_key=self.api_key,
-            api_url=self.api_url
+            #base_url = self.api_url if self.api_url and len(self.api_url) else None
         )
         
-        self.logger = logging.getlogger(__name__)
+        self.logger = logging.getLogger(__name__)
         
     def set_generation_model(self, model_id: str):
         self.generation_model_id = model_id
